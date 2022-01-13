@@ -49,7 +49,7 @@ class Myenv(py_environment.PyEnvironment):
             self._state=0
         elif self._state==5:
             self._episode_ended = True
-
+        self.show_map()
         if self._episode_ended:
             return ts.termination(np.array([self._state], dtype=np.int32), 20)
         elif self.step_count >= 20:
@@ -61,13 +61,7 @@ class Myenv(py_environment.PyEnvironment):
 
     def show_map(self):
         game_map = self.game_map.copy()
-        game_map[self._state]=1
+        game_map[self._state] = 1
         print(game_map)
 
-        # if self._episode_ended or self._state >= 21:
-        #         #     reward = self._state - 21 if self._state <= 21 else -21
-        #         #     return ts.termination(np.array([self._state], dtype=np.int32), reward)
-        #         # else:
-        #         #     return ts.transition(
-        #         #         np.array([self._state], dtype=np.int32), reward=0.0, discount=1.0)
 
